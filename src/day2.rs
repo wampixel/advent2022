@@ -76,18 +76,20 @@ fn read(filename: &str) -> Vec<usize> {
             _ => Possibility::None // Impossible case
         };
 
-        score1 += match round[1] {
-            "X" => Possibility::Rock.score(oponent),
-            "Y" => Possibility::Paper.score(oponent),
-            "Z" => Possibility::Scissors.score(oponent),
-            _ => Possibility::None.score(oponent) // Imposible Case
-        };
-
-        score2 += match round[1] {
-            "X" => {Results::Lose as usize + oponent.win() as usize}
-            "Y" => {Results::Draw as usize + oponent as usize}
-            "Z" => {Results::Win as usize  + oponent.lose() as usize}
-            _ => 0
+        match round[1] {
+            "X" => {
+                score1 += Possibility::Rock.score(oponent);
+                score2 += Results::Lose as usize + oponent.win() as usize
+            }
+            "Y" => {
+                score1 += Possibility::Paper.score(oponent);
+                score2 += Results::Draw as usize + oponent as usize
+            }
+            "Z" => {
+                score1 += Possibility::Scissors.score(oponent);
+                score2 += Results::Win as usize + oponent.lose() as usize
+            }
+            _ => {} // Imposible Case
         };
     }
     vec![score1, score2]

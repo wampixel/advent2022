@@ -10,7 +10,7 @@ enum Results {
     Lose = 0
 }
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, PartialEq)]
 enum Possibility {
     None,
     Rock,
@@ -28,6 +28,7 @@ impl Possibility {
             Self::Scissors => Self::Rock
         }
     }
+
     pub fn win(self) -> Possibility {
         match self {
             Self::None => Self::None,
@@ -38,16 +39,12 @@ impl Possibility {
     }
 
     pub fn score(self, oponent: Possibility) -> usize {
-        self as usize + 
-        match (self, oponent) {
-            (Self::Rock, Self::Scissors) => Results::Win,
-            (Self::Paper, Self::Rock) => Results::Win,
-            (Self::Scissors, Self::Paper) => Results::Win,
-            (Self::Rock, Self::Paper) => Results::Lose,
-            (Self::Paper, Self::Scissors) => Results::Lose,
-            (Self::Scissors, Self::Rock) => Results::Lose,
-            _ => Results::Draw
-        } as usize 
+        if self == oponent.lose() {
+            return self as usize + Results::Win as usize;
+        } else if self == oponent.win() {
+            return self as usize + Results::Lose as usize;
+        }
+        self as usize + Results::Draw as usize
     }
 }
 

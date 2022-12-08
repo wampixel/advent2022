@@ -53,8 +53,8 @@ const FILENAME: &'static str = "datas/day2.txt";
 
 pub fn resolve() {
     let results: Vec<usize> = read(FILENAME);
-    println!("Day rwo, first star: {}", results[0]);
-    println!("Day rwo, second star: {}", results[1]);
+    println!("Day two, first star: {}", results[0]);
+    println!("Day two, second star: {}", results[1]);
 }
 
 fn read(filename: &str) -> Vec<usize> {

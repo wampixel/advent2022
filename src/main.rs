@@ -1,5 +1,6 @@
 use advent::{
-    day1, day2, day3, day4, day5
+    day1, day2, day3, day4, day5,
+    day6
 };
 
 fn main() {
@@ -8,4 +9,5 @@ fn main() {
     day3::resolve();
     day4::resolve();
     day5::resolve();
+    day6::resolve();
 }
